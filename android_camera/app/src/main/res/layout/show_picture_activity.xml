@@ -3,16 +3,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="抓取拍照"
-        android:onClick="viewOnClick"
-        android:id="@+id/button5" />
-
-    <SurfaceView
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/surfaceView" />
-
+        android:id="@+id/imageView2" />
 </LinearLayout>

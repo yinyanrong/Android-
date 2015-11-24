@@ -1,12 +1,19 @@
 package com.example.user.myapplication;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.ImageFormat;
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
@@ -52,7 +59,7 @@ public class CustomCamera extends Activity {
     public  void viewOnClick(View view) {
         switch (view.getId()) {
             case R.id.button5:
-                setStartProview(camera,surfaceholder);
+                setCameraParameters();
                 break;
         }
     }
@@ -104,6 +111,43 @@ public class CustomCamera extends Activity {
         @Override
         public void surfaceDestroyed(SurfaceHolder holder) {
             releaseCamera();
+        }
+    };
+    //设置相机的属性 抓取图像
+    private void  setCameraParameters() {
+      Camera.Parameters  caParameters =camera.getParameters();
+      caParameters.setPictureFormat(ImageFormat.JPEG);
+      caParameters.setPreviewSize(400, 500);
+      caParameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+      camera.autoFocus(new Camera.AutoFocusCallback() {
+          @Override
+          public void onAutoFocus(boolean success, Camera camera) {
+
+              if(success){
+                  camera.takePicture(null,null,pictureCallback);
+              }
+          }
+      });
+    }
+    private Camera.PictureCallback   pictureCallback=new Camera.PictureCallback() {
+        @Override
+        public void onPictureTaken(byte[] data, Camera camera) {
+         String  filepath=  Environment.getExternalStorageDirectory().getPath()+"/capture.jpg";
+           File  file= new File(filepath);
+            FileOutputStream  outputStream = null;
+            try {
+                outputStream =new FileOutputStream(file);
+                outputStream.write(data);
+                outputStream.close();
+                Intent  showIntent=new Intent(CustomCamera.this,ShowPictureActivity.class);
+                showIntent.putExtra("filepath",filepath);
+                startActivity(showIntent);
+                CustomCamera.this.finish();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     };
 }
