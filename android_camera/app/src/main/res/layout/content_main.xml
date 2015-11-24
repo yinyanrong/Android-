@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView"
                 android:layout_centerHorizontal="true"
-                android:onClick="viewClick"
+                android:onClick="viewOnClick"
                 android:textAllCaps="false"
                 android:text="调用系统相机（Intent取值）" />
 
@@ -45,9 +45,16 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="调用系统相册裁剪图片"
+                android:text="调用系统相册选择图片"
                 android:onClick="viewClick"
                 android:id="@+id/button4" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开启自定义相机"
+                android:onClick="viewClick"
+                android:id="@+id/button6" />
 
             <ImageView
                 android:id="@+id/imageView"

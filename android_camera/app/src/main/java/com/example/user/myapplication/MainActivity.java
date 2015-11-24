@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView imageView;
     String originImagePath;//原始文件的地址
     String cutImagePath;// 剪贴文件的地址；
-    String environmentPath = "";
+   public  String environmentPath = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
                 openSysAlbum.setType("image/*");
                 startActivityForResult(openSysAlbum, 4000);
             break;
+            case R.id.button6:
+                Intent customActivity=new Intent(this,CustomCamera.class);
+                startActivity(customActivity);
+            break;
         }
     }
 
@@ -97,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
             imageView.setImageBitmap(bitmap);
         }
     }
+    //通过 URI 读取文件
     private Bitmap openImageFile(Uri   uri){
         ContentResolver cr = this.getContentResolver();
         Bitmap bitmap = null;
@@ -108,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return   bitmap;
     }
-    //读取文件
+    //通过 filePath  读取文件
     private Bitmap readImageFile(String filePath) {
         FileInputStream inputStream = null;
         Bitmap bitmap = null;
