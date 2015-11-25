@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView"
                 android:layout_centerHorizontal="true"
-                android:onClick="viewOnClick"
+                android:onClick="viewClick"
                 android:textAllCaps="false"
                 android:text="调用系统相机（Intent取值）" />
 
