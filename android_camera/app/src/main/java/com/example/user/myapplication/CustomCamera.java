@@ -31,6 +31,12 @@ public class CustomCamera extends Activity {
         surfaceView = (SurfaceView) findViewById(R.id.surfaceView);
         surfaceholder = surfaceView.getHolder();
         surfaceholder.addCallback(callback);
+        surfaceView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                camera.autoFocus(null);
+            }
+        });
     }
 
     /*************
